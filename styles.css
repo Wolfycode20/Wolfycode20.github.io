@@ -1,0 +1,311 @@
+:root {
+  --grad-start: #ccadff;
+  --grad-end: #ff6e58;
+  --text-color: #474ea2;
+  --swing-amplitude: 15deg;
+}
+
+/* Global resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: sans-serif;
+  color: var(--text-color);
+}
+
+body {
+  background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+  overflow-x: hidden;
+}
+
+/* Header and decorative line */
+header {
+  position: relative;
+  text-align: center;
+  padding: 2rem;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 1rem;       /* separación bajo el h1 */
+  left: 5.3%;          /* alineado con el hilo de #wrapper1 */
+  right: 6.3%;         /* alineado con el hilo de #wrapper2 */
+  height: 2px;
+  background: #753ba7; /* mismo color que los hilos */
+}
+.logo{
+font-family: 'Shrikhand', cursive;
+ color:#ff5757;        
+  font-size: 5rem;
+  text-shadow: -10px 0px 0px #402a6a;
+  margin: 0;
+}
+h2{
+    text-align: center;
+     font-size: 2rem;
+    color:#e0f0ff;
+}
+
+/* Estrellitas con forma de polígono */
+.star {
+  position: absolute;
+  width: 8px;   /* tamaño base, se reescribirá en JS */
+  height: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpolygon points='4,0 5.2,2.4 8,3.2 5.2,4 4,8 2.8,4 0,3.2 2.8,2.4' fill='white'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Links container */
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 960px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 1) Para que el enlace actúe como flexbox y alinee icono + texto */
+.column a {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 2) Tamaño y separación del icono */
+.column a .icon {
+  width: 64px;
+  height: 64px;
+  margin-right: 0.5rem; /* espacio entre icono y texto */
+  flex-shrink: 0;       /* que no se contraiga */
+}
+
+/* (Opcional) Ajusta el font-size si quieres que el texto baje un poco */
+.column a {
+  font-size: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--text-color);
+  color: #d09cef;
+  background: var(--text-color);
+  border-radius: 8px;
+  font-weight: bold;        /* añade texto en negrita */
+  transition: background 0.3s, color 0.3s;
+    font-size: 2rem;    
+}
+
+
+a:hover {
+  background: var(--text-color);
+  color: white;
+}
+
+/* Lámparas colgantes */
+.lamparas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;   /* sube por encima del footer */
+}
+
+.lamp-wrapper {
+  position: absolute;
+  pointer-events: auto;
+  transform-origin: top center;
+  top: 10.2rem;           /* baja el inicio del hilo 4rem desde el top */
+}
+
+/* Posicionamiento lateral de las lámparas */
+#wrapper1 {
+  left: -25px;
+}
+
+#wrapper2 {
+  right: -10px;
+}
+
+.hilo {
+  width: 2px;
+  height: 200px;       /* ajusta para que el extremo inferior toque la línea */
+  background: #753ba7;
+  margin: 0 auto;
+}
+
+.lampara {
+  display: block;
+  width: 200px;
+}
+/* Hilo derecho más largo */
+#wrapper2 .hilo {
+  height: 450px; /* ajusta este valor hasta la longitud deseada */
+}
+footer {
+  display: block;
+  width: 100%;
+  clear: both;
+
+  /* Color de fondo del footer */
+  background-color: #402a6a;
+
+
+
+  /* Espacio interno y centrado del texto */
+  padding: 2rem 1rem;
+  text-align: center;
+
+   margin-top: 4rem;
+}
+
+
+/* La barra decorativa si quieres que sea un “golpe” de color */
+.footer-bar {
+  width: 100%;
+  height: 8px;
+  margin-bottom: 1.5rem; /* separa la barra del contenido */
+}
+
+/* Estilos del contenido dentro del footer */
+.footer-content p {
+  color: #e0f0ff;
+  margin-bottom: 1rem;
+  font-size: 26px;
+}
+
+.footer-content img {
+  
+  max-width: 120px;     /* o el tamaño que quieras */
+  height: auto;
+  display: block;
+  margin: 0.5rem auto;  /* centrar la imagen */
+}
+
+/* Animación de balanceo */
+@keyframes swing {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(var(--swing-amplitude));
+  }
+  75% {
+    transform: rotate(calc(var(--swing-amplitude) * -1));
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.swing {
+  animation: swing 2s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+     flex-direction: column;
+    max-width: 80%;    /* ahora ocupa solo el 80% del ancho */
+    margin: 0 auto;    /* centrado horizontal */
+  }
+
+  #wrapper1 {
+    left: -78px;
+    top: 17.5rem;
+  }
+
+  #wrapper2 {
+    right: -78px;
+    top: 17.5rem;
+  }
+
+  header::after {
+    left: 20px;
+    right: 20px;
+  }
+
+    #moonCanvas {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* --------------------------------------------------
+     1) Ajustar ancho del container para no ocupar todo
+     -------------------------------------------------- */
+  .container {
+    max-width: 85%;       /* por ejemplo, 85% en vez de 100% */
+    margin: 0 auto;       /* lo centramos */
+    flex-direction: column;
+  }
+
+  /* ------------------------------
+     2) Reposicionar las lámparas
+     ------------------------------ */
+  #wrapper1 {
+    left:  -40px;             /* un poco más adentro */
+    top: 10.2rem;            /* igual que antes o ajusta */
+  }
+  #wrapper1 .hilo {
+    height: 220px;        /* sube o baja según visual */
+  }
+
+  #wrapper2 {
+    right: -40px;
+    top: 10.2rem;
+  }
+  #wrapper2 .hilo {
+    height: 420px;
+  }
+
+  /* -----------------------------
+     3) Desactivar luna si quieres
+     ----------------------------- */
+  #moonCanvas {
+    display: none;
+  }
+
+  /* ------------------------------------------
+     4) Adaptar línea decorativa al nuevo container
+     ------------------------------------------ */
+  header::after {
+    left: 7.5%;           /* 7.5% = (100 − 85) ÷ 2 */
+    right: 7.5%;
+  }
+
+  /* -------------------
+     5) Espacio antes footer
+     ------------------- */
+  footer {
+    margin-top: 3rem;     /* deja más “colchón” */
+  }
+}
+
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Clase que dispara el giro */
+.footer-logo.spin {
+  animation: girar 0.5s linear 1;  /* dura medio segundo */
+  transition: none;
+}
